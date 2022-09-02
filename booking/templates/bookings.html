@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings{% endblock %}
+{% block hero %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;>
+						<h1>My Bookings</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<style>
+	.product {
+		display: flex;
+		justify-content: center;
+		height: 18rem;
+		margin: 1rem;
+		padding: 1rem;
+		border-color: black;
+	}
+	.product:hover {
+		cursor: pointer;
+	}
+	.product:hover .product-title {
+		color: #F28123;
+	}
+ 	.product-img {
+		position: relative;
+		width: 30%;
+		height: 100%;
+	}
+	.product-img img {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		object-fit:cover;
+	}
+	.product-text {
+		position: relative;
+		display: block;
+		width: 50%;
+		height: 100%;
+		padding-left: 2rem;
+	}
+	.product-price {
+		position: relative;
+		display: block;
+		width: 20%;
+		height: 100%;
+	}
+	.boxed-btn {
+		font-size: 0.75rem;
+	}
+	.side-menu p {
+		font-size: 1.3rem;
+	}
+	.side-menu p:hover {
+		font-size: 1.4rem;
+	}
+	.side-menu .active p {
+		color: #F28123;
+	}
+	.menu {
+		margin-bottom: 4rem;
+	}
+	.side-menu button {
+		text-align: left;
+		padding: 0;
+		margin: 0;
+		border: none;
+		background-color: transparent;
+	}
+    .details {
+        display: flex;
+        justify-content: center;
+    }
+    .side-1 {
+        display: block;
+        flex: 1;
+        position: relative;
+    }
+    .side-1 {
+        display: block;
+        flex: 1;
+        position: relative;
+    }
+</style>
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+
+
+			<div class="row">	
+                <div class="col-md-3 side-menu">
+                    <div class="section-title" style="text-align: center;">	
+                        <h3><span class="orange-text">User</span> Details</h3>
+                    </div>
+					<h5>{{user.name}}</h5>
+                    <p>Mobile No: {{user.phone}}</p>
+                    <p>Email Address: {{user.email}}</p>
+				</div>
+
+				<div class="col-md-9">
+                    <div class="section-title" style="text-align: center;">	
+                        <h3><span class="orange-text">My</span> Bookings</h3>
+                    </div>
+					{% for b, img in bookings %}
+					<a href="/booking/{{b.bid}}/" style="color: black; text-decoration-style: none; cursor: pointer;">
+                    <div class="product">
+                            <div class="product-img">
+                                {% for i in img %}
+                                <img src="{{i.image.url}}" alt="">
+                                {% endfor %}
+                            </div>
+                            <div class="product-text">
+                                <h4 class="product-title">{{b.product.product_name}}</h4>
+                            <div class="details">
+                                <div class="side-1">
+                                    <p><strong>Booking ID:</strong> {{b.bid}}</p>
+                                    <p><strong>Arrival:</strong> {{b.arrival_date}}, {{b.arrival_time}}</p>
+                                    <p><strong>Booked On:</strong> {{b.booked_on}}</p>
+                                </div>
+                                <div class="side-2">
+                                    <p><strong>Adults:</strong> {{b.adults}}</p>
+                                    <p><strong>Children:</strong> {{b.children}}</p>
+                                    <p><strong>Services Opted:</strong></p>
+                                    {% if b.car_service %}<p>Car Service</p>{% endif %}
+                                    {% if b.pickup_from_airport %}<p>Pickup</p>{% endif %}
+                                </div>
+                            </div>
+                            </div>
+                            <div class="price">
+                                <h4 class="price">Total: ${{b.total}}</h4><br>
+                            </div>
+                        
+					</div>
+                </a>
+				<hr>
+				{% endfor %}
+				</div>
+			</div>
+
+			
+
+			</div>
+	</div>
+	<!-- end products -->
+
+{% endblock %}

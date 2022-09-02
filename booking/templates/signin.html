@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Sign In{% endblock %}
+{% block hero %}
+
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;></p>
+						<h1>Sign In</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<style>
+    .square-btn {
+		position: relative;
+		width: 70%;
+		padding: 0.5rem;
+		color: white;
+		background-color: rgb(184, 29, 29);
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.form {
+		margin: 1.75rem;
+	}
+	.form input {
+		width: 70%;
+		border-radius: 3px;
+		border: none;
+		background-color: #dddddd;
+		padding: 0.5rem;
+	}
+    .empty {
+        height: 7rem;
+    }
+</style>
+<div class="empty"></div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <div class="form">
+            <div class="section-title" style="text-align: center;">	
+                <h3><span class="orange-text">Sign</span> In</h3>
+            </div>
+            <form action="/logIn/" method="get">
+                <div style="display: flex; justify-content: center;">
+                    <input type="tel" name="phone" required placeholder="Phone Number">
+                </div>
+                <br>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit" class="square-btn" style="background-color: #F28123;">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
+<div class="empty"></div>
+{% endblock %}

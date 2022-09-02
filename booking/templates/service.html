@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block title %}{{s.service_name}}{% endblock %}
+{% block hero %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;>&nbsp;<a href="/allServices/" class="orange-text">Services</a>&nbsp;></p>
+						<h1>{{s.service_name}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<style>
+	.product {
+		display: flex;
+		justify-content: center;
+		height: 18rem;
+		margin: 1rem;
+		padding: 1rem;
+		border-color: black;
+	}
+	.product:hover {
+		cursor: pointer;
+	}
+	.product:hover .product-title {
+		color: #F28123;
+	}
+ 	.product-img {
+		position: relative;
+		width: 30%;
+		height: 100%;
+	}
+	.product-img img {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		object-fit:cover;
+	}
+	.product-text {
+		position: relative;
+		display: block;
+		width: 50%;
+		height: 100%;
+		padding-left: 2rem;
+	}
+	.product-price {
+		position: relative;
+		display: block;
+		width: 20%;
+		height: 100%;
+	}
+	.boxed-btn {
+		font-size: 0.75rem;
+	}
+	.side-menu p {
+		font-size: 1.3rem;
+	}
+	.side-menu p:hover {
+		font-size: 1.4rem;
+	}
+	.side-menu .active p {
+		color: #F28123;
+	}
+	.menu {
+		margin-bottom: 4rem;
+	}
+	.side-menu button {
+		text-align: left;
+		padding: 0;
+		margin: 0;
+		border: none;
+		background-color: transparent;
+	}
+</style>
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+
+
+			<div class="row">
+				<div class="col-md-2 side-menu">
+					<div class="menu">
+						<h4>Sort By <i class="fa fa-arrow-down"></i></h4>
+						<a href="#" class="active"><p>Recommended</p></a><hr>
+						<a href="#"><p>Price</p></a><hr>
+						<a href="#"><p>Latest</p></a><hr>
+					</div>
+					<div class="menu">
+						<h4>Services <i class="fa fa-arrow-down"></i></h4>
+						{% for service in services %}
+							{% if service.service_name == s.service_name %}
+							<a href="#" class="active"><p>{{service.service_name}}</p></a><hr>
+							{% else %}
+							<form action="take/" method="get">
+								<input type="hidden" name="sid" value="{{service.sid}}">
+								<button type="submit"><p>{{service.service_name}}</p></button><hr>
+							</form>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+	
+				<div class="col-md-10">
+					{% for p, img in products %}
+					<div class="product">
+						<div class="product-img">
+							{% for i in img %}
+							<a href="/product/{{p.pid}}/{{msg}}/"><img src="{{i.image.url}}" alt=""></a>
+							{% endfor %}
+						</div>
+						<div class="product-text">
+							<a href="/product/{{p.pid}}/{{msg}}/"><h4 class="product-title">{{p.product_name}}</h4></a>
+						<p class="product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+						<div class="hero-btns">
+							<a class="boxed-btn">Live Guide</a>
+							<a class="boxed-btn">Free Meals</a>
+						</div>
+						</div>
+						<div class="price">
+							<p class="discount"><s>$100.00</s></p>
+							<h4 class="price">${{p.price_per_person}}</h4><br>
+							<p>Booked By:</p>
+							<h4>200 travellers!</h4>
+						</div>
+					</div>
+				<hr>
+				{% endfor %}
+				</div>
+			</div>
+
+			
+
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="pagination-wrap">
+						<ul>
+							<li><a href="#">Prev</a></li>
+							
+							<li><a class="active" href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">Next</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end products -->
+
+{% endblock %}
+
+	

@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% block title %}{{product.product_name}}{% endblock %}
+{% block hero %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;>&nbsp;<a href="/allServices/" class="orange-text">Services</a>&nbsp;>&nbsp;<a href="/show-service/{{product.sid.sid}}" class="orange-text">{{product.sid.service_name}}</a>&nbsp;></p>
+						<h1>{{product.product_name}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+{% endblock %}
+{% block body %}
+{% load static %}
+
+<style>
+	.images {
+		display: flex;
+		justify-content: center;
+		margin-top: 5rem;
+		margin-bottom: 4rem;
+	}
+	.main-img {
+		width: 100%;
+		height: 15rem;
+	}
+	.side-img {
+		width: 100%;
+		height: 7rem;
+	}
+	.select {
+		background-color: #ededed;
+		position: relative;
+		width: 90%;
+		margin: 1.5rem;
+		border-bottom-left-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+		height: 27.5rem;
+	}
+	.sel-title {
+		background-color: #F28123;
+		position: relative;
+		width: 100%;
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+		height: 2.25rem;
+		display: flex;
+		justify-content: center;
+	}
+	.sel-title h4 {
+		padding: 0.25rem;
+		font-weight: 250;
+		color: white;
+	}
+	.sel-det {
+		left: 7%;
+		position: relative;
+		margin: 0.5rem;
+	}
+	.square-btn {
+		position: relative;
+		width: 70%;
+		left: 8.5%;
+		padding: 0.5rem;
+		color: white;
+		background-color: #F28123;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.basic-content {
+		display: flex;
+	}
+	.left {
+		flex: 2;
+		display: block;
+	}
+	.right {
+		flex: 1;
+		display: block;
+	}
+</style>
+
+	<!-- single product -->
+		<div class="container" style="margin-bottom: 5rem;">
+			<div class="col-md-12" style="z-index: 1;">
+				<div class="images">
+					<div class="main-img col-md-6">
+						{% for m in main %}
+						<img src="{{m.image.url}}" alt="">
+						{% endfor %}
+					</div>
+					<div class="side-img col-md-3">
+						{% for side in side_1 %}
+						<img src="{{side.image.url}}" alt="">
+						<br><br>
+						{% endfor %}
+					</div>
+					<div class="side-img col-md-3">
+						{% for side in side_2 %}
+						<img src="{{side.image.url}}" alt="">
+						<br><br>
+						{% endfor %}
+					</div>
+				</div>
+			</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div class="row">
+				<div class="col-md-8" style="margin-top: 3rem; z-index: 1;">
+					<div class="single-product-content">
+						<div class="basic-content">
+							<div class="left">
+								<h3>{{product.product_name}}</h3>
+								<p class="single-product-pricing"><span>Per Person <s>$100.00</s></span> ${{product.price_per_person}}.00</p>
+							</div>
+							<div class="right">
+								<h5>Available Dates:</h5>
+								<p>{{product.available_from}}&nbsp;-&nbsp;{{product.available_till}}</p>
+							</div>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
+						
+							<p><strong>Category: </strong>{{product.sid.service_name}}</p>
+						<div class="single-product-content">
+							<h4>About This Trip</h4>
+							<p><i class="fa fa-map"></i>&nbsp;Live Guide</p>
+							<p><i class="fa fa-spa"></i>&nbsp;Spa Facilities</p>
+							<p><i class="fa fa-utensils"></i>&nbsp;Free Meals</p>
+						</div>
+							
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="select">
+						<div class="sel-title">
+							<h4>Select Travel Details</h4>
+						</div>
+						<div class="sel-det" style="margin-top: 1.5rem;">
+							<form action="/cart/" method="get">
+							<input id="datepicker" type="text" name="arrival" onfocus="(this.type='date')" style="width: 85%; position: relative;" placeholder="Arrival Date" />
+							<br><br>
+							<input id="datepicker" type="text" name="adults" onfocus="(this.type='number')" style="width: 85%; position: relative;" placeholder="Adults" />
+							<br><br>
+							<input id="datepicker" type="text" name="children" onfocus="(this.type='number')" style="width: 85%; position: relative;" placeholder="Children" />
+							<br><br>
+							<input id="datepicker" type="text" name="time" onfocus="(this.type='time')" style="width: 85%; position: relative;" placeholder="Arrival Time" />
+							<br><br>
+							<input type="hidden" name="pid" value="{{product.pid}}">
+								<button type="submit" class="square-btn">Book Now</button>
+							</form>
+						</div>
+					</div>
+					<h6 style="color: red; text-align: center;">{{msg}}</h6>
+					<br>
+					<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+				</div>
+			</div>
+		</div><br><br>
+	<!-- end single product -->
+
+	<script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap'
+        });
+    </script>
+
+	<style>
+		.img-text {
+			position: relative;
+			top: -21rem;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+		.img-text h3, .img-text p {
+			color: white;
+		}
+		.head-over-img {
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+		}
+		.price {
+			font-size: 3rem;
+		}
+		.bg img {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			object-fit:scale-down;
+		}
+		.prod:hover {
+			color: #F28123;
+		}
+		.slide {
+			display: none;
+		}
+		.active {
+			display: block;
+		}
+	</style>
+
+<script>
+	setInterval(myFunc, 2000);
+
+	window.onload = function(){
+		var prods = document.querySelectorAll('.bg');
+		prods.forEach((prod) => {
+			prod.firstElementChild.classList.add('active');
+		});
+	}
+
+	function sleep(milliseconds) {
+		const date = Date.now();
+		let currentDate = null;
+		do {
+			currentDate = Date.now();
+		} while (currentDate - date < milliseconds);
+	}
+
+	function myFunc(){
+		var prods = document.querySelectorAll('.bg');
+		prods.forEach((prod) => {
+			var image = prod.querySelector('.active');
+			image.classList.remove('active');
+			if (image != prod.lastElementChild){
+				image.nextElementSibling.classList.add('active');
+			}
+			else {
+				prod.firstElementChild.classList.add('active');
+			}
+		});
+	}
+</script>
+
+	<!-- more products -->
+	<div class="more-products mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Related</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% for i, imgs in recommend %}
+				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
+					<a href="/product/{{i.pid}}/{{msg}}/">
+						<div class="single-product-item">
+							<div class="bg">
+								{% for img in imgs %}
+								<img class="slide" src="{{img.image.url}}" alt="">
+								{% endfor %}
+							</div>
+							<div class="img-text">
+								<h3 class="head-over-img">{{i.product_name}}</h3>
+								<p class="product-price"><span>{{i.product_desc}}</span></p>
+								<p class="price">${{i.price_per_person}}.00</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- end more products -->
+{% endblock %}

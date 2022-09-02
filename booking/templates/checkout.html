@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block hero %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;>&nbsp;<a href="/cart/" class="orange-text">Cart</a>&nbsp;></p>
+						<h1>Checkout</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+{% endblock %}
+
+{% block body %}
+{% load static %}
+	<!-- check out section -->
+	<div class="checkout-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="checkout-accordion-wrap">
+						<div class="accordion" id="accordionExample">
+						  
+						  <div class="card single-accordion">
+						    <div class="card-header" id="headingThree">
+						      <h5 class="mb-0">
+						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+						          Card Details
+						        </button>
+						      </h5>
+						    </div>
+						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+						      <div class="card-body">
+						        <div class="card-details">
+						        	<p>Card details section</p>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="order-details-wrap">
+						<table class="order-details">
+							<thead>
+								<tr>
+									<th>Package</th>
+									<th>Guests</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td rowspan="2">{{prod.product_name}}</td>
+									<td>{{adults}} adults</td>
+									<td>${{adult_total}}.00</td>
+								</tr>
+								<tr>
+									
+									<td>{{children}} children</td>
+									<td>${{child_total}}.00</td>
+								</tr>
+								<tr>
+									<td><h5>Total</h5></td>
+									<td>{{guests}} guests</td>
+									<td><h5>${{total}}.00</h5></td>
+								</tr>
+							</tbody>
+						</table>
+						<a href="#" class="boxed-btn" data-toggle="modal" data-target="#myModal">Book Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end check out section -->
+	<!--MODAL-->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h4 class="modal-title" style="text-align: left;">Confirm Details</h4>
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+			  <form action="/book/" method="get">
+				<p>Do you want Car Service?</p>
+			  <select name="car">
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			  </select>
+			  <br>
+			  <p>Do you prefer Air Port Pick Up?</p>
+			  <select name="airport">
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			  </select>
+			  
+			</div>
+			<div class="modal-footer">
+			  <button type="submit" class="boxed-btn">Confirm</button>
+			</div>
+		  </div>
+		</form>
+		  
+		</div>
+	</div>
+
+	{% endblock %}

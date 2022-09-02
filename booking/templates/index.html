@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block hero %}
+
+	<!-- hero area -->
+	<div class="hero-area hero-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<p class="subtitle">Away from monotonous life</p>
+							<h1>Magical Arabia</h1>
+							<p class="subtitle">9 years in love with Arabia.</p>
+							<p class="subtitle">150 Tours around Arabia.</p><br>
+							<div class="hero-btns">
+								{% for service in services %}
+								<a href="show-service/{{service.sid}}/" class="boxed-btn">{{service.service_name}}</a>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end hero area -->
+
+{% endblock %}
+
+{% block body %}
+{% load static %}
+	<!-- features list section -->
+	<!--
+		<div class="list-section pt-80 pb-80">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-shipping-fast"></i>
+						</div>
+						<div class="content">
+							<h3>Free Shipping</h3>
+							<p>When order over $75</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-phone-volume"></i>
+						</div>
+						<div class="content">
+							<h3>24/7 Support</h3>
+							<p>Get support all day</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="list-box d-flex justify-content-start align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-sync"></i>
+						</div>
+						<div class="content">
+							<h3>Refund</h3>
+							<p>Get refund within 3 days!</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	-->
+	<!-- end features list section -->
+
+	<style>
+		.img-text {
+			position: relative;
+			top: -21rem;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+		.img-text h3, .img-text p {
+			color: white;
+		}
+		.head-over-img {
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+		}
+		.price {
+			font-size: 3rem;
+		}
+		.bg img {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			object-fit:scale-down;
+		}
+		.prod:hover {
+			color: #F28123;
+		}
+		.slide {
+			display: none;
+		}
+		.active {
+			display: block;
+		}
+	</style>
+
+	<script>
+		setInterval(myFunc, 2000);
+
+		window.onload = function(){
+			var prods = document.querySelectorAll('.bg');
+			prods.forEach((prod) => {
+				prod.firstElementChild.classList.add('active');
+			});
+		}
+
+		function sleep(milliseconds) {
+			const date = Date.now();
+			let currentDate = null;
+			do {
+				currentDate = Date.now();
+			} while (currentDate - date < milliseconds);
+		}
+
+		function myFunc(){
+			var prods = document.querySelectorAll('.bg');
+			prods.forEach((prod) => {
+				var image = prod.querySelector('.active');
+				image.classList.remove('active');
+				if (image != prod.lastElementChild){
+					image.nextElementSibling.classList.add('active');
+				}
+				else {
+					prod.firstElementChild.classList.add('active');
+				}
+			});
+		}
+	</script>
+
+	<!-- product section -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Packages</span> Offered</h3>
+						<p>If you're in Saudi Arabia for the first time, this is the best way to explore our country</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				{% for i, imgs in products %}
+				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
+					<a href="/product/{{i.pid}}/{{msg}}/">
+						<div class="single-product-item">
+							<div class="bg">
+								{% for img in imgs %}
+								<img class="slide" src="{{img.image.url}}" alt="">
+								{% endfor %}
+							</div>
+							<div class="img-text">
+								<h3 class="head-over-img">{{i.product_name}}</h3>
+								<p class="product-price"><span>{{i.product_desc}}</span></p>
+								<p class="price">${{i.price_per_person}}.00</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- end product section -->
+
+	<!-- cart banner section -->
+	<section class="cart-banner pt-100 pb-100">
+    	<div class="container">
+        	<div class="row clearfix">
+            	<!--Image Column-->
+            	<div class="image-column col-lg-6">
+                	<div class="image">
+                    	<img src="{% static 'assets/img/sa.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--Content Column-->
+                <div class="content-column col-lg-6">
+					<h1><span class="orange-text">Testimonial</span> from our clients</h1><br>
+                    <h3>The best way to learn more about us and our service.</h3>
+                    <!--Countdown Timer-->
+					<br><br>
+                	<a href="#" class="cart-btn mt-3"> Did not find your package?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end cart banner section -->
+
+
+	<!-- latest news -->
+	<div class="latest-news pt-150 pb-150">
+		<div class="container">
+
+			<div class="row">
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="#"><div class="latest-news-bg" style="background-image: url('/static/assets/img/view.jpg');"></div></a>
+						<div class="news-text-box">
+							<h3><a href="#">The best view in Saudi Arabia</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> UserABC</span>
+								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
+							</p>
+							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
+							<a href="#" class="read-more-btn">Read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="#"><div class="latest-news-bg" style="background-image: url('/static/assets/img/mood.jpg');"></div></a>
+						<div class="news-text-box">
+							<h3><a href="#">We bring you mood of travel in Saudi Arabia</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> UserABC</span>
+								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
+							</p>
+							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
+							<a href="#" class="read-more-btn">Read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+					<div class="single-latest-news">
+						<a href="#"><div class="latest-news-bg" style="background-image: url('/static/assets/img/rjh.jpg');"></div></a>
+						<div class="news-text-box">
+							<h3><a href="#">Riyadh, Hegra, Jeddah</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> UserABC</span>
+								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
+							</p>
+							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
+							<a href="#" class="read-more-btn">Read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<a href="#" class="boxed-btn">View All</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end latest news -->
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block title %}{{product.product_name}}{% endblock %}
+{% block hero %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;>&nbsp;<a href="/mybookings/" class="orange-text">My Bookings</a>&nbsp;></p>
+						<h1>{{b.product.product_name}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+{% endblock %}
+{% block body %}
+{% load static %}
+
+<style>
+	.images {
+		display: flex;
+		justify-content: center;
+		margin-top: 5rem;
+		margin-bottom: 4rem;
+	}
+	.main-img {
+		width: 100%;
+		height: 15rem;
+	}
+	.side-img {
+		width: 100%;
+		height: 7rem;
+	}
+	.select {
+		background-color: #ededed;
+		position: relative;
+		width: 90%;
+		margin: 1.5rem;
+		border-bottom-left-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+		height: 27.5rem;
+	}
+	.sel-title {
+		background-color: #F28123;
+		position: relative;
+		width: 100%;
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+		height: 2.25rem;
+		display: flex;
+		justify-content: center;
+	}
+	.sel-title h4 {
+		padding: 0.25rem;
+		font-weight: 250;
+		color: white;
+	}
+	.sel-det {
+		left: 7%;
+		position: relative;
+		margin: 0.5rem;
+	}
+	.square-btn {
+		position: relative;
+		width: 70%;
+		left: 8.5%;
+		padding: 0.5rem;
+		color: white;
+		background-color: #F28123;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.basic-content {
+		display: flex;
+	}
+	.left {
+		flex: 2;
+		display: block;
+	}
+	.right {
+		flex: 1;
+		display: block;
+	}
+</style>
+
+	<!-- single product -->
+		<div class="container" style="margin-bottom: 5rem;">
+			<div class="col-md-12" style="z-index: 1;">
+				<div class="images">
+					<div class="main-img col-md-6">
+						{% for m in main %}
+						<img src="{{m.image.url}}" alt="">
+						{% endfor %}
+					</div>
+					<div class="side-img col-md-3">
+						{% for side in side_1 %}
+						<img src="{{side.image.url}}" alt="">
+						<br><br>
+						{% endfor %}
+					</div>
+					<div class="side-img col-md-3">
+						{% for side in side_2 %}
+						<img src="{{side.image.url}}" alt="">
+						<br><br>
+						{% endfor %}
+					</div>
+				</div>
+			</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div class="row">
+				<div class="col-md-8" style="margin-top: 3rem; z-index: 1;">
+					<div class="single-product-content">
+						<div class="basic-content">
+							<div class="left">
+								<h3>{{b.product.product_name}}</h3>
+								<p class="single-product-pricing"><span>Per Person <s>$100.00</s></span> ${{b.product.price_per_person}}.00</p>
+							</div>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
+						
+							<p><strong>Category: </strong>{{b.product.sid.service_name}}</p>
+						<div class="single-product-content">
+							<h4>About This Trip</h4>
+							<p><i class="fa fa-map"></i>&nbsp;Live Guide</p>
+							<p><i class="fa fa-spa"></i>&nbsp;Spa Facilities</p>
+							<p><i class="fa fa-utensils"></i>&nbsp;Free Meals</p>
+						</div>
+							
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="details" style="margin-top: 5rem;">
+                        <h5 style="text-align: center;">Booking Details</h5>
+                        <div class="info">
+                            <p><strong>Booking ID: </strong>{{b.bid}}</p>
+                            <p><strong>Arrival Date: </strong>{{b.arrival_date}}</p>
+                            <p><strong>Arrival Time: </strong>{{b.arrival_time}}</p>
+                            <p><strong>Adults: </strong>{{b.adults}}</p>
+                            <p><strong>Children: </strong>{{b.children}}</p>
+                            <p><strong>Services: </strong>{% if b.car_service %}Car Service, {% endif %}
+                                {% if b.pickup_from_airport %}Airport Pickup{% endif %}</p>
+                            <h6><strong>Total Price: </strong>${{b.total}}</h6>
+                        </div>
+                    </div>
+					<br><br><br><br>
+					<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+				</div>
+			</div>
+		</div><br><br>
+	<!-- end single product -->
+
+	<script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap'
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+{% block hero %}
+
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p><a href="/" class="orange-text">Home</a>&nbsp;></p>
+						<h1>Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<style>
+	.product {
+		display: flex;
+		justify-content: center;
+		height: 14rem;
+		margin: 1rem;
+		padding: 1rem;
+		border-color: black;
+	}
+	.product:hover {
+		cursor: pointer;
+	}
+	.product:hover .product-title {
+		color: #F28123;
+	}
+ 	.product-img {
+		position: relative;
+		width: 30%;
+		height: 100%;
+	}
+	.product-img img {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		object-fit:cover;
+	}
+	.product-text {
+		position: relative;
+		display: block;
+		width: 50%;
+		height: 100%;
+		padding-left: 2rem;
+	}
+	.product-price {
+		position: relative;
+		display: block;
+		width: 20%;
+		height: 100%;
+	}
+	.boxed-btn {
+		font-size: 0.75rem;
+	}
+	.side-menu p {
+		font-size: 1.3rem;
+	}
+	.side-menu p:hover {
+		font-size: 1.4rem;
+	}
+	.side-menu .active p {
+		color: #F28123;
+	}
+	.menu {
+		margin-bottom: 4rem;
+	}
+	.side-menu button {
+		text-align: left;
+		padding: 0;
+		margin: 0;
+		border: none;
+		background-color: transparent;
+	}
+	.square-btn {
+		position: relative;
+		width: 100%;
+		padding: 0.5rem;
+		color: white;
+		background-color: rgb(184, 29, 29);
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.form {
+		margin: 1.75rem;
+	}
+	.form input {
+		width: 70%;
+		border-radius: 3px;
+		border: none;
+		background-color: #dddddd;
+		padding: 0.5rem;
+	}
+	.name {
+		position: relative;
+		justify-content: center;
+		display: flex;
+	}
+	.n {
+		width: 100%;
+		position: relative;
+	}
+</style>
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<hr>
+					<div class="product">
+						<div class="product-img">
+							<a href="#"><img src="{{img.image.url}}" alt=""></a>
+						</div>
+						<div class="product-text">
+							<h4 class="product-title">{{prod.product_name}}</h4>
+							<div class="info">
+								<div class="side-1">
+									<p>Guests: {{adults}} adults, {{children}} children</p>
+								</div>
+								<div class="side-2">
+									<p>Arrival: {{arrival}}, {{time}}</p>
+								</div>
+								<br>
+								<div class="side-2">
+									<p>Per Adult <s>$100.00</s> <strong>${{prod.price_per_person}}.00</strong></p>
+								</div>
+								<div class="side-2">
+									<p>Per Child <s>$65.00</s> <strong>${{prod.child_price}}.00</strong></p>
+								</div>
+							</div>
+						</div>
+						<div class="price">
+							<p class="discount">Total</p>
+							<p class="discount"><s>${{orig}}.00</s></p>
+							<h4 class="price">${{total}}.00</h4><br>
+							<button type="submit" class="square-btn">Remove</button>
+						</div>
+					</div>
+					<hr>
+					<br>
+					<form action="/checkout/" method="get">
+					<h4>Enter Your Details</h4>
+					<div class="form">
+						<div class="name">
+							<div class="n">
+								<input type="text" name="fname" required placeholder="First Name">
+							</div>
+							<div class="n">
+								<input type="text" name="lname" required placeholder="Last Name">
+							</div>
+						</div>
+						<br>
+						<div>
+							<input type="tel" name="phone" required placeholder="Phone Number">
+						</div>
+						<br>
+						<input type="email" name="email" required placeholder="Email Address">
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						<table class="total-table">
+							<h3 style="text-align: center;"><span class="orange-text">Booking</span> Summary</h3>
+							<tbody>
+								<tr class="total-data">
+									<td><strong>Adults </strong></td>
+									<td>{{adults}} x $100.00</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Children </strong></td>
+									<td>{{children}} x $65.00</td>
+								</tr>
+								<tr class="total-data">
+									<td><strong><s>Original Price</s> </strong></td>
+									<td><s>${{orig}}.00</s></td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Discount </strong></td>
+									<td>${{discount}}.00</td>
+								</tr>
+								</tr>
+								<tr class="total-data">
+									<td><h5>Total </h5></td>
+									<td><h5>${{total}}.00</h5></td>
+								</tr>
+								
+							</tbody>
+						</table>
+						<div class="cart-buttons">
+								<button type="submit" class="square-btn" style="background-color: #F28123;">Checkout</button>
+							</form>
+						</div>
+					</div>
+
+					<div class="coupon-section">
+						<h3>Apply Coupon</h3>
+						<div class="coupon-form-wrap">
+							<form action="index.html">
+								<p><input type="text" placeholder="Coupon"></p>
+								<p><input type="submit" value="Apply"></p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+
+{% endblock %}
